@@ -17,6 +17,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.mdhscompsci.augments.block.ModBlocks;
 import com.mdhscompsci.augments.item.ModItems;
 
 import java.util.stream.Collectors;
@@ -31,11 +32,13 @@ public class Augments
     private static final Logger LOGGER = LogManager.getLogger();
 
     public Augments() {
-        // Register the setup method for modloadng
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
+        // register items and blocks
         ModItems.register(eventBus);
+        ModBlocks.register(eventBus);
 
+        // Register the setup method for modloadng
         eventBus.addListener(this::setup);
         // Register the enqueueIMC method for modloading
         eventBus.addListener(this::enqueueIMC);

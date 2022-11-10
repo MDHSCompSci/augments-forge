@@ -1,3 +1,6 @@
 {
-    "item.augments.tungsten_ingot": "Tungsten Ingot"
+    "item.augments.tungsten_ingot": "Tungsten Ingot",
+    "block.augments.tungsten_ore":   "Scheelite",
+
+    "itemGroup.augmentsTab": "Augments"
 }
