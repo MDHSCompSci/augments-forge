@@ -11,7 +11,10 @@ import net.minecraftforge.registries.ForgeRegistries;
 public class ModItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Augments.MOD_ID);
 
-    public static final RegistryObject<Item> TUNGSTEN_INGOT = ITEMS.register("tungsten_ingot", () -> new Item(new Item.Properties().tab(ModItemGroup.AUGMENTS_GROUP)));
+    public static final RegistryObject<Item> TUNGSTEN_INGOT = ITEMS.register("tungsten_ingot",
+            () -> new Item(new Item.Properties().tab(ModItemGroup.AUGMENTS_GROUP)));
+    public static final RegistryObject<Item> TUNGSTEN_NUGGET = ITEMS.register("tungsten_nugget",
+            () -> new Item(new Item.Properties().tab(ModItemGroup.AUGMENTS_GROUP)));
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);

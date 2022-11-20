@@ -18,7 +18,8 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
 public class ModBlocks {
-    public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, Augments.MOD_ID);
+    public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS,
+            Augments.MOD_ID);
 
     public static final RegistryObject<Block> TUNGSTEN_ORE = registerBlock("tungsten_ore",
             () -> new Block(AbstractBlock.Properties
@@ -28,6 +29,14 @@ public class ModBlocks {
                     .harvestTool(ToolType.PICKAXE)
                     .strength(4f, 4f)));
 
+    public static final RegistryObject<Block> TUNGSTEN_BLOCK = registerBlock("tungsten_block",
+            () -> new Block(AbstractBlock.Properties
+                    .of(Material.METAL)
+                    .harvestLevel(3)
+                    .requiresCorrectToolForDrops()
+                    .harvestTool(ToolType.PICKAXE)
+                    .strength(6f, 6f)));
+
     // function to register blocks
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);
@@ -36,7 +45,7 @@ public class ModBlocks {
     }
 
     // function to register block items
-    private static <T extends Block>RegistryObject<Item> registerBlockItem(String name, RegistryObject<T> block) {
+    private static <T extends Block> RegistryObject<Item> registerBlockItem(String name, RegistryObject<T> block) {
         return ModItems.ITEMS.register(name,
                 () -> new BlockItem(block.get(), new Item.Properties().tab(ModItemGroup.AUGMENTS_GROUP)));
     }
