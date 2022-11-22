@@ -175,3 +175,14 @@ publishing {
         }
     }
 }
+
+repositories {
+    maven {
+        url = "https://maven.theillusivec4.top/"
+    }
+}
+
+dependencies {
+    runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.16.5-4.0.8.2")
+    compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.16.5-4.0.8.2:api")
+}
