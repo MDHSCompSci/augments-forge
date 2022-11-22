@@ -14,12 +14,17 @@ public class Springhand extends Item implements ICurioItem{
 
     
 
+    public Springhand(Properties pProperties) {
+        super(pProperties);
+        //TODO Auto-generated constructor stub
+    }
+
     @Override
     public void curioTick(String identifier, int index, LivingEntity livingEntity, ItemStack stack) {
         //will run every tick
         PlayerEntity player = (PlayerEntity) livingEntity;
 
-        if(!player.world.isRemote()){
+        if(player.level.isClientSide){
             boolean hasPlayerStrength = player.getActiveEffects().contains(Effects.DAMAGE_BOOST);
         }
 
