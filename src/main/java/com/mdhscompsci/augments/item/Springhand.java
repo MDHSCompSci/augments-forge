@@ -2,14 +2,22 @@ package com.mdhscompsci.augments.item;
 
 import net.minecraftforge.common.MinecraftForge;
 
-import net.minecraft.entity.LivingEntity;
+import java.util.List;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.*;
+import net.minecraft.item.Items;
 import net.minecraft.util.DamageSource;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.items.IItemHandlerModifiable;
+import top.theillusivec4.curios.api.CuriosApi;
+import top.theillusivec4.curios.api.SlotResult;
+import top.theillusivec4.curios.api.SlotTypePreset;
 import top.theillusivec4.curios.api.type.capability.ICurioItem;
 import top.theillusivec4.curios.api.type.util.ICuriosHelper;
 
@@ -23,28 +31,36 @@ public class Springhand extends Item implements ICurioItem{
     //THIS SHIT does WORK
     //thanks :)
 
-    private static ICuriosHelper curiosHelper;
+    private static final Logger LOGGER = LogManager.getLogger();
 
     @SubscribeEvent
     public void LivingHurtEvent(LivingHurtEvent e){
        DamageSource source = e.getSource();
+       
        if(source.getEntity() instanceof PlayerEntity){
         PlayerEntity player = (PlayerEntity) source.getEntity();
-        if(!player.level.isClientSide){
 
-            //THIS CAUSES A NULL EXCEPTION
-            //will come back to this later (or fix it for me xoxo)
-            if(!curiosHelper.findFirstCurio(player, this).equals(null)){
-                //equipped
-                //fist
-                if(player.inventory.getSelected().equals(null))e.setAmount(1000f);
+        if(!player.level.isClientSide){
+            try{
+                List<SlotResult> items = CuriosApi.getCuriosHelper().findCurios(player, this);
+                Boolean isEquipped = items.size() > 0;
+
+                if(isEquipped && player.inventory.getSelected().equals(ItemStack.EMPTY)){
+                    e.setAmount(1000f);
+                }
+
+            } catch (NullPointerException error){
+                
             }
+            
+            
             
         }
        }
        
     }
 
+    /* 
     @Override
     public void curioTick(String identifier, int index, LivingEntity livingEntity, ItemStack stack) {
         //will run every tick
@@ -62,4 +78,5 @@ public class Springhand extends Item implements ICurioItem{
 
         ICurioItem.super.curioTick(identifier, index, livingEntity, stack);
     }
+    */
 }
