@@ -14,12 +14,15 @@ public class Springhand extends Item implements ICurioItem{
         super(pProperties);
     }
     
+    //THIS SHIT DOESNT WORK
+    //HELP
+
     @Override
     public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack){
         PlayerEntity player = (PlayerEntity) slotContext.getWearer();
         player.kill();
     }
-    
+
     @Override
     public void curioTick(String identifier, int index, LivingEntity livingEntity, ItemStack stack) {
         //will run every tick
