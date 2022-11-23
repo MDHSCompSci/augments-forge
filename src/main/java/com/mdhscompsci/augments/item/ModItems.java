@@ -16,7 +16,7 @@ public class ModItems {
     public static final RegistryObject<Item> TUNGSTEN_NUGGET = ITEMS.register("tungsten_nugget",
             () -> new Item(new Item.Properties().tab(ModItemGroup.AUGMENTS_GROUP)));
     public static final RegistryObject<Item> SPRINGHAND = ITEMS.register("springhand", 
-            () -> new Item(new Item.Properties().tab(ModItemGroup.AUGMENTS_GROUP).stacksTo(1)));
+            () -> new Springhand(new Item.Properties().tab(ModItemGroup.AUGMENTS_GROUP).stacksTo(1)));
     
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
