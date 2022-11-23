@@ -70,7 +70,7 @@ public class Augments
     {
        //add curios slot
         InterModComms.sendTo("curios", SlotTypeMessage.REGISTER_TYPE,
-            () -> SlotTypePreset.CHARM.getMessageBuilder().build());
+            () -> SlotTypePreset.HANDS.getMessageBuilder().build());
     }
 
     private void processIMC(final InterModProcessEvent event)

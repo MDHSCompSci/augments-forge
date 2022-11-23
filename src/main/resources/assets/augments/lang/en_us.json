@@ -3,6 +3,7 @@
     "block.augments.tungsten_block": "Block of Tungsten",
     "item.augments.tungsten_nugget": "Tungsten Nugget",
     "block.augments.tungsten_ore":   "Scheelite",
+    "item.augments.springhand": "Springhand Augment",
 
     "itemGroup.augmentsTab": "Augments"
 }
