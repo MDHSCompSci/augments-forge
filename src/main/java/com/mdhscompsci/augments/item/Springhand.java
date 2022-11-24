@@ -12,6 +12,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.util.DamageSource;
+import net.minecraftforge.event.entity.item.ItemEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.items.IItemHandlerModifiable;
@@ -19,7 +20,7 @@ import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotResult;
 import top.theillusivec4.curios.api.SlotTypePreset;
 import top.theillusivec4.curios.api.type.capability.ICurioItem;
-import top.theillusivec4.curios.api.type.util.ICuriosHelper;
+import net.minecraftforge.event.entity.living.LivingKnockBackEvent;
 
 public class Springhand extends Item implements ICurioItem{
 
@@ -27,33 +28,22 @@ public class Springhand extends Item implements ICurioItem{
         super(pProperties);
         MinecraftForge.EVENT_BUS.register(this);
     }
-    
-    //THIS SHIT does WORK
-    //thanks :)
-
-    private static final Logger LOGGER = LogManager.getLogger();
 
     @SubscribeEvent
-    public void LivingHurtEvent(LivingHurtEvent e){
-       DamageSource source = e.getSource();
+    public void LivingHurtEvent(LivingHurtEvent event){
+       DamageSource source = event.getSource();
        
        if(source.getEntity() instanceof PlayerEntity){
         PlayerEntity player = (PlayerEntity) source.getEntity();
 
         if(!player.level.isClientSide){
-            try{
-                List<SlotResult> items = CuriosApi.getCuriosHelper().findCurios(player, this);
-                Boolean isEquipped = items.size() > 0;
+            List<SlotResult> items = CuriosApi.getCuriosHelper().findCurios(player, this);
+            Boolean isEquipped = items.size() > 0;
 
-                if(isEquipped && player.inventory.getSelected().equals(ItemStack.EMPTY)){
-                    e.setAmount(1000f);
-                }
-
-            } catch (NullPointerException error){
-                
+            if(isEquipped && player.inventory.getSelected().equals(ItemStack.EMPTY)){
+                event.setAmount(7f);
+                source.getEntity().knockback()-\;
             }
-            
-            
             
         }
        }
