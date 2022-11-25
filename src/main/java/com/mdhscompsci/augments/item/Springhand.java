@@ -7,8 +7,8 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.DamageSource;
-import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import net.minecraft.util.math.vector.Vector3d;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotResult;
@@ -21,25 +21,39 @@ public class Springhand extends Item implements ICurioItem{
         MinecraftForge.EVENT_BUS.register(this);
     }
 
+    //applies knockback to entity if right clicked with hand with springhand equipped
+
     @SubscribeEvent
-    public void LivingHurtEvent(LivingHurtEvent event){
-        DamageSource source = event.getSource();
-       
-        if(source.getEntity() instanceof PlayerEntity){
-            PlayerEntity player = (PlayerEntity) source.getEntity();
+    public void onEntityRightClick(PlayerInteractEvent.EntityInteract e){
+        PlayerEntity player = e.getPlayer();
 
-            if(!player.level.isClientSide){
-                List<SlotResult> items = CuriosApi.getCuriosHelper().findCurios(player, this);
-                Boolean isEquipped = items.size() > 0;
+        if(!player.level.isClientSide){
+            List<SlotResult> items = CuriosApi.getCuriosHelper().findCurios(player, this);
 
-              if(isEquipped && player.inventory.getSelected().equals(ItemStack.EMPTY)){
-                event.setAmount(9f);
+            if(items.size() > 0 && player.inventory.getSelected().equals(ItemStack.EMPTY)){
+                LivingEntity target = (LivingEntity) e.getTarget();
+
                 double knockbackX = -player.getLookAngle().x();
                 double knockbackZ = -player.getLookAngle().z();
-                ((LivingEntity) event.getEntity()).knockback(10f, knockbackX, knockbackZ);
+                target.knockback(10f, knockbackX, knockbackZ);
             }
         }
-        }  
+    }
+
+    //applies knockback to self if block right clicked with hand with springhand equipped
+
+    @SubscribeEvent
+    public void onBlockRightClick(PlayerInteractEvent.RightClickBlock e){
+        PlayerEntity player = e.getPlayer();
+
+        List<SlotResult> items = CuriosApi.getCuriosHelper().findCurios(player, this);
+
+        //MUST be done on both sides
+        if(items.size() > 0 && player.inventory.getSelected().equals(ItemStack.EMPTY)){
+            Vector3d playerMotion = player.getDeltaMovement();
+            Vector3d playerLookAngle = player.getLookAngle();
+            player.setDeltaMovement(new Vector3d(playerMotion.x() - playerLookAngle.x(), playerMotion.y() - playerLookAngle.y(), playerMotion.z() - playerLookAngle.z()));
+        }
     }
 
     /* 
