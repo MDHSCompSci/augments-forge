@@ -1,5 +1,6 @@
-# augments-forge
+# AUGMENTS (Forge)
 
-this is a mod again
+A Minecraft mod project by MDHS Computer Science Club
 
-# text
+- Spring hand
+- Rocket hand
