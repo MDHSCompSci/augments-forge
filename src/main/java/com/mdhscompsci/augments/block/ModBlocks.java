@@ -24,7 +24,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> TUNGSTEN_ORE = registerBlock("tungsten_ore",
             () -> new Block(AbstractBlock.Properties
                     .of(Material.STONE)
-                    .harvestLevel(3)
+                    .harvestLevel(2)
                     .requiresCorrectToolForDrops()
                     .harvestTool(ToolType.PICKAXE)
                     .strength(4f, 4f)));
@@ -32,7 +32,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> TUNGSTEN_BLOCK = registerBlock("tungsten_block",
             () -> new Block(AbstractBlock.Properties
                     .of(Material.METAL)
-                    .harvestLevel(3)
+                    .harvestLevel(2)
                     .requiresCorrectToolForDrops()
                     .harvestTool(ToolType.PICKAXE)
                     .strength(6f, 6f)));
