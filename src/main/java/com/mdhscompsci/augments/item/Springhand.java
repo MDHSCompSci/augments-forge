@@ -4,8 +4,6 @@ import net.minecraftforge.common.MinecraftForge;
 
 import java.util.List;
 
-import javax.annotation.Nonnull;
-
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
