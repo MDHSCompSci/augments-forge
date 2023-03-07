@@ -1,8 +1,9 @@
 {
     "item.augments.tungsten_ingot": "Tungsten Ingot",
-    "block.augments.tungsten_block": "Block of Tungsten",
     "item.augments.tungsten_nugget": "Tungsten Nugget",
+    "item.augments.tungsten_dust": "Scheelite Dust",
     "block.augments.tungsten_ore":   "Scheelite",
+    "block.augments.tungsten_block": "Block of Tungsten",
     "item.augments.springhand": "Springhand Augment",
 
     "itemGroup.augmentsTab": "Augments"
